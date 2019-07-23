@@ -16,7 +16,12 @@ const API_KEY = "AIzaSyAOSP-NccyNOQDd-nDScagJ27nYSjvbkQY";
 
 class Api {
 
-  pesquisar(String caminho) async{
+  String _search;
+  String _nextToken;
+
+
+  Future<List<Video>> pesquisar(String caminho) async {
+    _search = caminho;
 
     http.Response response = await http.get(
         "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$caminho&type=video&key=$API_KEY&maxResults=10"
@@ -25,9 +30,20 @@ class Api {
     return decode(response);
   }
 
+  Future<List<Video>> nextPage() async {
+    http.Response response = await http.get(
+        "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$_search&type=video&key=$API_KEY&maxResults=10&pageToken=$_nextToken"
+    );
+
+    return decode(response);
+  }
+
   List<Video> decode(http.Response response){
     if(response.statusCode == 200){
       var decoded = json.decode(response.body);
+
+      _nextToken = decoded["nextPageToken"];
+
 //pegando os items que é uma lista de maps, pega cada mapa utilizando o comando map,
 //para cada um dos mapas é chamado uma funcao anonima
 
