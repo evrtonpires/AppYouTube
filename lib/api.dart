@@ -14,7 +14,7 @@ const API_KEY = "AIzaSyAOSP-NccyNOQDd-nDScagJ27nYSjvbkQY";
  */
 
 
-class api {
+class Api {
 
   pesquisar(String caminho) async{
 
@@ -22,7 +22,7 @@ class api {
         "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$caminho&type=video&key=$API_KEY&maxResults=10"
     );
 
-    decode(response);
+    return decode(response);
   }
 
   List<Video> decode(http.Response response){
