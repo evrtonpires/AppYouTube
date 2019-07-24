@@ -25,7 +25,7 @@ class Home extends StatelessWidget {
                 stream: BlocProvider
                     .getBloc<FavoritosBloc>()
                     .outFav,
-                initialData: {},
+
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Text("${snapshot.data.length}");

@@ -50,7 +50,7 @@ class VideoTile extends StatelessWidget {
                   stream: BlocProvider
                       .getBloc<FavoritosBloc>()
                       .outFav,
-                  initialData: {},
+
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return IconButton(
@@ -65,9 +65,14 @@ class VideoTile extends StatelessWidget {
                           });
                     }
                     else {
-                      return FlareActor(
-                        "logos/carregando.flr", animation: "carregando",
-                        color: Colors.red,
+                      return Container(
+                        height: 40,
+                        width: 40,
+                        alignment: Alignment.center,
+                        child: FlareActor(
+                          "logos/carregando.flr", animation: "carregando",
+                          color: Colors.red,
+                        ),
                       );
                     }
                   }),

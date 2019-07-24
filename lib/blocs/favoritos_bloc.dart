@@ -4,19 +4,19 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:youtub/models/video.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rxdart/rxdart.dart';
 
 class FavoritosBloc implements BlocBase {
   Map<String, Video> _favoritos = {};
 
-  final StreamController<Map<String, Video>> _favController =
-  StreamController<Map<String, Video>>.broadcast();
+  final _favController = BehaviorSubject<Map<String, Video>>.seeded({});
 
   Stream<Map<String, Video>> get outFav => _favController.stream;
 
   FavoritosBloc() {
     SharedPreferences.getInstance().then((prefs) {
-      if (prefs.getKeys().contains("favoritos")) {
-        _favoritos = json.decode(prefs.getString("favoritos")).map(
+      if (prefs.getKeys().contains("favorites")) {
+        _favoritos = json.decode(prefs.getString("favorites")).map(
                 (k, v) {
               return MapEntry(k, Video.fromJson(v));
             }
@@ -40,7 +40,7 @@ class FavoritosBloc implements BlocBase {
 
   void _salvarFav() {
     SharedPreferences.getInstance().then((prefs) {
-      prefs.setString("favoritos", json.encode(_favoritos));
+      prefs.setString("favorites", json.encode(_favoritos));
     });
   }
 
