@@ -50,10 +50,11 @@ class DataSearch extends SearchDelegate<String> {
             return Center(
 
               child: Container(
-                height: 100,
-                width: 100,
+                height: 300,
+                width: 300,
                 child: FlareActor(
                   "logos/carregando.flr", animation: "carregando",
+                  color: Colors.red,
                 ),
               ),
 
