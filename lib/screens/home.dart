@@ -5,6 +5,7 @@ import 'package:youtub/blocs/favoritos_bloc.dart';
 import 'package:youtub/blocs/videos_bloc.dart';
 import 'package:youtub/delegates/data_search.dart';
 import 'package:youtub/models/video.dart';
+import 'package:youtub/screens/favoritos.dart';
 import 'package:youtub/widgets/video_tile.dart';
 
 class Home extends StatelessWidget {
@@ -40,7 +41,13 @@ class Home extends StatelessWidget {
                 Icons.star,
                 color: Colors.white,
               ),
-              onPressed: () {}),
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) {
+                      return Favoritos();
+                    })
+                );
+              }),
           IconButton(
               icon: Icon(
                 Icons.search,
