@@ -1,8 +1,10 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:youtub/blocs/favoritos_bloc.dart';
 import 'package:youtub/blocs/videos_bloc.dart';
 import 'package:youtub/delegates/data_search.dart';
+import 'package:youtub/models/video.dart';
 import 'package:youtub/widgets/video_tile.dart';
 
 class Home extends StatelessWidget {
@@ -19,11 +21,19 @@ class Home extends StatelessWidget {
         actions: <Widget>[
           Align(
             alignment: Alignment.center,
-            child: Text(
-              "0",
-              textAlign: TextAlign.end,
-              style: TextStyle(color: Colors.white),
-            ),
+            child: StreamBuilder<Map<String, Video>>(
+                stream: BlocProvider
+                    .getBloc<FavoritosBloc>()
+                    .outFav,
+                initialData: {},
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text("${snapshot.data.length}");
+                  }
+                  else {
+                    return Container();
+                  }
+                }),
           ),
           IconButton(
               icon: Icon(

@@ -1,7 +1,7 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:youtub/blocs/favoritos.dart';
+import 'package:youtub/blocs/favoritos_bloc.dart';
 import 'package:youtub/models/video.dart';
 
 class VideoTile extends StatelessWidget {
